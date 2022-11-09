@@ -298,15 +298,14 @@ export const FaxTokenImAPI = {
         faxTokenIMContract = new Contract(FaxTokenIM.abi,FaxTokenIM.networks[chain_id].address);
         faxTokenIMContract.setProvider(FaxTokenImAPI.web3.currentProvider);
         break
-      case 1:
-        break;
       case 4:
       case 5:
         faxTokenIMContract = new Contract(BeagleIM.abi,EnsContracts[chain_id].beagleIM);
         faxTokenIMContract.setProvider(FaxTokenImAPI.web3wallet.currentProvider);
         break;
+      case 1:
       default:
-        console.log('not support for chain:'+chain_id);
+        console.log('not support IMContract for chain:'+chain_id);
         return ;
         break;
     }
@@ -361,15 +360,15 @@ export const FaxTokenImAPI = {
 
   testIMcontract: () => {
 //    return await FaxTokenImAPI.imContract.methods.admin().call();
+    if (FaxTokenImAPI.imContract)
     new Promise(((resolve,reject) => {
-      if (FaxTokenImAPI.imContract)
       FaxTokenImAPI.imContract.methods.admin().call().then(result=>{
         console.log('testIMcontract',result);
         resolve(result);
       });
-      else
-        reject();
-    }))
+      // else
+      //   reject();
+    }));
   },
 
   testSaleContract: () => {
@@ -398,7 +397,8 @@ export const FaxTokenImAPI = {
     //let provider = new WalletConnectProvider({ infuraId: '27e484dcd9e3efcfd25a83a78777cdf1' });
 //   let provider = new WalletConnectProvider({ infuraId: '84ae00fec54f4d65bd1c0505b0e96383' });
     const provider = new WalletConnectProvider({
-      infuraId: "84ae00fec54f4d65bd1c0505b0e96383",
+     infuraId: "84ae00fec54f4d65bd1c0505b0e96383",
+//      goerliId: "84ae00fec54f4d65bd1c0505b0e96383",
       qrcodeModalOptions: {
         mobileLinks: [
           "rainbow",
