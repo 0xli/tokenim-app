@@ -38,6 +38,13 @@ class MyAccountInfo extends Component {
     const { balanceLoading, registerReward, loginReward, etherBalance, faxBalance, registerRewardLoading, loginRewardLoading } = this.props.user;
     const short_address = shortenAddress(loginAddress, 12);
     const display_username = visitorMode ? formatMessage({ id: 'account.visitor' }) : (loginEns || formatMessage({ id: 'account.my_account' }))
+    const chainNames={
+      1:'Mainnet',
+      5:'Goerli',
+      4:'rinkeby',
+      1515:'Beagle'
+    };
+    const chainname=window.ethereum.chainId?'['+chainNames[parseInt(window.ethereum.chainId)]+']':'[]';
     return (
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 66 }}>
@@ -50,6 +57,7 @@ class MyAccountInfo extends Component {
           <Spin spinning={balanceLoading}>
             <div>
               <Tooltip style={{width:'10%'}} title={formatMessage({ id: 'account.logout_tooltip' })}>
+                <div style={{ backgroundColor: '#aea2ae' }}>{chainname}</div>
                 <LogoutOutlined onClick={this.showConfirm} />
               </Tooltip>
               {/*<div style={{ display: 'flex' }}>*/}

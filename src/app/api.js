@@ -737,19 +737,22 @@ export const FaxTokenImAPI = {
   },
 
   queryAccountBalance: (address) => {
-    return FaxTokenImAPI.tokenContract.methods.balanceOf(address).call().then((balance) => {
-      const tokenDecimal = FaxTokenImAPI.web3.utils.toNumber(balance);
-      return new Promise((resolve, reject) => {
-        FaxTokenImAPI.web3.eth.getBalance(address, (err, ether) => {
-          if (err) {
-            reject(err);
-          } else {
-            const etherDecimal = FaxTokenImAPI.web3.utils.toBN(ether);
-            resolve({ tokenDecimal, etherDecimal })
-          }
+    if (FaxTokenImAPI.tokenContract)
+      return FaxTokenImAPI.tokenContract.methods.balanceOf(address).call().then((balance) => {
+        const tokenDecimal = FaxTokenImAPI.web3.utils.toNumber(balance);
+        return new Promise((resolve, reject) => {
+          FaxTokenImAPI.web3.eth.getBalance(address, (err, ether) => {
+            if (err) {
+              reject(err);
+            } else {
+              const etherDecimal = FaxTokenImAPI.web3.utils.toBN(ether);
+              resolve({ tokenDecimal, etherDecimal })
+            }
+          })
         })
       })
-    })
+    else
+      return new Promise(resolve => resolve({tokenDecimal:0,etherDecimal:0}))
   },
 
   transferEther: (from, to, value, privateKey) => {
