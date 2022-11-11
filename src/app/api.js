@@ -70,7 +70,7 @@ export const EnsContracts={
     ens: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
     resolver: '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41',
     reverseRegistrar: '0x084b1c3C81545d370f3634392De611CaaBFf8148',
-    subdomain: '0xe38bCAE0fb14dD33784389ba76757591fc16BbBD'
+    subdomainRegistrar: '0xe38bCAE0fb14dD33784389ba76757591fc16BbBD'
   },
    // official rinkebyEns
    4: {
