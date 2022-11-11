@@ -244,13 +244,13 @@ export const FaxTokenImAPI = {
       case 1515:
         FaxTokenImAPI.web3TokenContract = new Contract(FaxToken.abi, FaxToken.networks[chain_id].address);
         break;
-      case 1:
       case 4:
       case 5:
       case 9000:
         FaxTokenImAPI.web3TokenContract = new Contract(BeagleToken.abi,EnsContracts[chain_id].beagleToken);
 //        faxTokenIMContract.setProvider(FaxTokenImAPI.web3wallet.currentProvider);
         break;
+      case 1:
       default:
         console.log('not support for chain:'+chain_id);
         return ;
