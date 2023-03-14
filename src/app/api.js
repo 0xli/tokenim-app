@@ -58,7 +58,8 @@ export const defaultEnsChainId = 5;
 export const apiProviders={
   1:{infura:"https://mainnet.infura.io/v3/00a80def04f248feafdc525179f89dbf"},
   5:{ infura: "https://goerli.infura.io/v3/84ae00fec54f4d65bd1c0505b0e96383"},
-  4:{infura:'https://rinkeby.infura.io/v3/84ae00fec54f4d65bd1c0505b0e96383'}
+  4:{infura:'https://rinkeby.infura.io/v3/84ae00fec54f4d65bd1c0505b0e96383'},
+  20:{rpc:'https://api.elastos.io/eth'},
 };
 export const EnsContracts={
   41515: {ens:'0x98325eDBE53119bB4A5ab7Aa35AA4621f49641E6',
@@ -93,6 +94,12 @@ export const EnsContracts={
     beagleToken:'0x025eAA712D2A8a78F1f4153C7ed29437cab8a7a0',
     beagleIM:'0xCde5ad1dB6204a94Af1E0f898794B6E9b1A4C55b',
     beagleTokenSale:'0x861b1e58Bc40DB544bc06790D7Be3Cf9eb6100b6',
+  },
+  20:{
+    ens: "0x0d4D469653810fBBeea4Eb58c1f6841B22F3049a",
+    resolver: "0x8FC9DB0b65e56D7555Ece51972a32aC35470134f",
+    reverseRegistrar:  "0xbA068D35DB24E881741dA01576Ffbe25324C1C77",
+    subdomainRegistrar: "0x04E1C262ADcAf5dc7eC7DEF720177442dcfe702b"
   },
   1515:{ens:'0x7bc06c482DEAd17c0e297aFbC32f6e63d3846650',
     resolver:'0x5c74c94173F05dA1720953407cbb920F3DF9f887',

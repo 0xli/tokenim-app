@@ -46,13 +46,14 @@ export async function switchToChainId(chainid) {
 
   export function isSupportedNatwork(chainId) {
     if (chainId)
-      if (chainId!=4 && chainId!=5 && chainId!=1515 && chainId!=1)
+      if (chainId!=4 && chainId!=5 && chainId!=1515 && chainId!=1  && chainId!=20)
         return false;
       else
         return true;
     if (window.ethereum.chainId!='0x4'
       && window.ethereum.chainId!='0x5eb'
         && window.ethereum.chainId!='0x1'
+        && window.ethereum.chainId!='0x14'
         && window.ethereum.chainId!='0x5')
       return false;
     else
@@ -272,7 +273,7 @@ export async function newSubdomain(name,domain,tld) {
      // gasPrice: '0x77359400', //2,000,000,000
     //gasPrice:'0x59682f00',//1,500,000,000
     gasPrice:'0x09502f9000',
-    value: '0x0',
+    value: '0x0',//0.0005 eth if name length more than 8 charactors
     data,
     chainId: chainId,
   };

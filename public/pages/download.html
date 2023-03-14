@@ -10,7 +10,14 @@
 
   <style>
     .download-block {
-      height: 230px;
+      height: 430px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .download-text-block {
+      /*height: 430px;*/
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -18,10 +25,26 @@
     }
 
     .ios-download-btn {
-      width: 122px;
-      height: 36px;
-      background-image: url('../image/btn-ios.png');
-      background-size: cover;
+      width: 160px;
+      height: 100%;
+      background-image: url('../image/icon_appstore__ev0z770zyxoy_large_2x.png');
+      /*background-image: url('../image/btn-ios.png');*/
+      margin-top: 30px;
+      background-size: contain;
+      display: inline-block;
+      overflow: hidden;
+      text-indent: -999px;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+    }
+
+    .ios-testflight-btn {
+      width: 160px;
+      height: 100%;
+      /*height: 122px;*/
+      margin-top: 30px;
+      background-image: url('../image/testflight-128x128_27.png');
+      background-size: contain;
       display: inline-block;
       overflow: hidden;
       text-indent: -999px;
@@ -50,32 +73,36 @@
       <a href="../">
         <div class="nav-logo">
           <div class="logo-img"></div>
-          <div class="logo-title">Beagle</div>
+          <div class="logo-title">Beagle Chat</div>
         </div>
       </a>
-      <div class="page-title">下载</div>
+      <div class="page-title">iOS安装</div>
     </div>
   </div>
 
   <div class="context-body">
     <div class="container">
       <!-- title -->
-      <div class="text-center context-title">
-        <h2>下载APP</h2>
-      </div>
+<!--      <div class="text-center context-title">-->
+<!--        <h2>下载APP</h2>-->
+<!--      </div>-->
 
       <!-- download app -->
       <div class="container">
         <div class="row" style="margin-bottom:50px">
           <div style="padding-top:20px">
-            <div style="display:inline-block;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div style="display:inline-block;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="download-block">
-                <img src="../image/iphone.png" style="width:50px;height:100px" alt="">
-                <div>Beagle IOS</div>
-<!--                <a href="https://testflight.apple.com/join/aPZw3K1v" class="ios-download-btn" target="_blank">-->
-                  <a href="https://apps.apple.com/us/app/beagle/id1597429120"  class="ios-download-btn" target="_blank"></a>
-                  下载iOS APP
+                <a href="https://apps.apple.com/us/app/beagle/id1597429120" class="ios-download-btn" target="_blank" style=“color:#989A9C；width:20%;marginRight:'5%'” rel="noreferrer"></a>
+                <label>Apple应用商店</label>
+                <a href="https://testflight.apple.com/join/aPZw3K1v"  class="ios-testflight-btn" target="_blank">
+                  <!--                  <img style="width: 50px" src="https://testflight.apple.com/images/testflight-128x128_27.png">-->
+                  <!--                  <a href="https://apps.apple.com/us/app/beagle/id1597429120"  class="ios-download-btn" target="_blank"></a>-->
+                  TestFlight
                 </a>
+                <label>TestFlight</label>
+                <div class="download-text-block">如果不能从您所在的应用商店下载，可以从TestFlight安装</div>
+                <div class="download-text-block">目前还没有Android版本.</div>
               </div>
             </div>
 <!--            <div style="display:inline-block;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">-->
@@ -102,9 +129,9 @@
     <!-- footer -->
     <div class="footer text-center">
       <div>
-        <img src="../image/beagles_black.jpg" alt="" style="width:120px">
+        <img src="../image/IOSLOGO.png" alt="" style="width:100px;border-radius: 20px">
       </div>
-      <div>
+      <div style="margin-top: 10px">
       <span style="color:#ffffff">Beagle</span>
       </div>
     </div>

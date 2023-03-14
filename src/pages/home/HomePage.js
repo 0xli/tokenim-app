@@ -983,14 +983,14 @@ class HomePage extends Component {
       }
     }
 
-    if (window.ethereum.chainId!=4 && window.ethereum.chainId!=5 && window.ethereum.chainId!=1)
+    if (window.ethereum.chainId!=4 && window.ethereum.chainId!=5 && window.ethereum.chainId!=1  && window.ethereum.chainId!=20)
       // popup menu selection of chain
      await switchToChainId('0x5');
     // should call registerENS
-    if (window.ethereum.chainId==4 || window.ethereum.chainId==5 || window.ethereum.chainId==1 || window.ethereum.chainId==9000 || window.App.connector){
+    if (window.ethereum.chainId==4 || window.ethereum.chainId==5 || window.ethereum.chainId==1 ||  window.ethereum.chainId==20 ||  window.ethereum.chainId==9000 || window.App.connector){
       this.setState({ confirmLoading: true });
       //saveShhName(nameValue)
-      newSubdomain(nameValue,'beagles','eth').then(() => {
+      newSubdomain(nameValue,window.ethereum.chainId==20?'beagle':'beagles',window.ethereum.chainId==20?'ela':'eth').then(() => {
           this.setState({ nameModal: false, confirmLoading: false });
         })
         .catch(e => {

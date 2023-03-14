@@ -10,6 +10,8 @@ import styles from './index.css';
 import WalletConnectSvg from '@/assets/walletconnect.svg';
 import PolkadotSvg from '@/assets/polkadot-js.svg';
 import MetamaskSvg from '@/assets/metamask-fox.svg';
+import GoogleConnectSvg from '@/assets/google.svg';
+import GithubConnectSvg from '@/assets/github.svg';
 
 const FormItem = Form.Item;
 
@@ -130,6 +132,16 @@ class LoginPage extends PureComponent {
     const { dispatch, location: { query } } = this.props;
     dispatch({ type: 'account/loginWithWalletConnect', payload: { query } });
   }
+  connectGoogle = () => {
+    const { dispatch, location: { query } } = this.props;
+    alert("AA+MPC Wallet:\r\nUse Google Account to Authenticate.\r\nComing soon ....");
+    dispatch({ type: 'account/loginWithGoogle', payload: { query } });
+  }
+  connectGithub = () => {
+    const { dispatch, location: { query } } = this.props;
+    alert("AA+MPC Wallet:\r\nUse Github Account to Authenticate. \r\nComing soon ....");
+    dispatch({ type: 'account/loginWithGithub', payload: { query } });
+  }
   connectSubstrate = () => {
     const { dispatch } = this.props;
     dispatch({ type: 'account/loginWithSubstrate' });
@@ -212,8 +224,8 @@ class LoginPage extends PureComponent {
           <a href={enLocale ? 'pages/whitepaperEN.html' : 'pages/whitepaper.html'} style={{color:'#989A9C', width:'25%',marginRight: "5%" }}>{formatMessage({ id: 'index.white_paper' })}</a>
           {/*<a href={enLocale ? 'https://beagle.gitbook.io/beagle-dao/' : 'https://beagle.gitbook.io/beagle-dao/'} style={{color:'#989A9C', width:'25%',marginRight: "5%" }}>{formatMessage({ id: 'index.white_paper' })}</a>*/}
           <a href={enLocale ? 'pages/faqEN.html' : 'pages/faq.html'} style={{ color:'#989A9C',  width:'20%', marginRight: '5%' }}>{formatMessage({ id: 'index.faq' })}</a>
-          {/*<a href={enLocale ? 'pages/downloadEN.html' : 'pages/download.html'} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>{formatMessage({ id: 'index.download' })}</a>*/}
-          <a href="https://apps.apple.com/us/app/beagle/id1597429120"  target="_blank" style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }} rel="noreferrer">{formatMessage({ id: 'index.download' })}</a>
+          <a href={enLocale ? 'pages/downloadEN.html' : 'pages/download.html'} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>{formatMessage({ id: 'index.download' })}</a>
+          {/*<a href="https://apps.apple.com/us/app/beagle/id1597429120"  target="_blank" style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }} rel="noreferrer">{formatMessage({ id: 'index.download' })}</a>*/}
           <a href={`/?locale=${oLocale}`} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>{oLocaleDes}</a>
           <a href={this.openSetting}  onClick={this.openSetting} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>OPT</a>
         </div>
@@ -287,6 +299,12 @@ class LoginPage extends PureComponent {
                 <Button disabled={connectingMetamask} type="primary" htmlType="submit" style={{ width: '100%', border:'0px',borderRadius:12,background:'#352E50' }}>
                   {formatMessage({ id: 'index.login' })}
                 </Button>
+              </FormItem>
+              <FormItem>
+                <Button loading={connectingSubstrate} onClick={this.connectGoogle} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GoogleConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.googleconnect' })}</Button>
+              </FormItem>
+              <FormItem>
+                <Button loading={connectingSubstrate} onClick={this.connectGithub} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GithubConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.githubconnect' })}</Button>
               </FormItem>
               {
                 metamaskOk ?

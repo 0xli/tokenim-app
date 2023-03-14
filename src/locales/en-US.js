@@ -86,6 +86,8 @@ export default {
   'index.walletconnect':'WalletConnect',
   'index.substrateconnect':'Connect with Substrate',
   'index.index.substrate_rpc_peer':'Substrate Peer',
+  'index.googleconnect':'Connect with Google',
+  'index.githubconnect':'Connect with Github',
 
   'register.pk_error': 'private key is invalid, the elliptic curve condition is not satisfied ',
   'register.pk_format_error': 'wrong private key format',

@@ -42,6 +42,7 @@ class MyAccountInfo extends Component {
       1:'Mainnet',
       5:'Goerli',
       4:'rinkeby',
+      20:'elastos',
       1515:'Beagle'
     };
     const chainname=window.ethereum.chainId?'['+chainNames[parseInt(window.ethereum.chainId)]+']':'[]';

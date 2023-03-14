@@ -89,6 +89,8 @@ export default {
   'index.walletconnect':'用WalletConnect登录',
   'index.substrateconnect':'用Substrate登录',
   'index.substrate_rpc_peer':'Substrate节点',
+  'index.googleconnect':'用Google登录',
+  'index.githubconnect':'用Github登录',
 
   'register.pk_error': 'private key无效, 不满足椭圆曲线条件',
   'register.pk_format_error': 'private key格式不正确',
