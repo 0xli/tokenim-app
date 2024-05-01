@@ -1,10 +1,20 @@
-## FaxToken-IM
+## Token-IM
+The web version of Beagle Chat
+### 0. 准备
+https://nodejs.org/en
+
+```
+如果node.js在17+以上
+https://stackoverflow.com/questions/74726224/opensslerrorstack-error03000086digital-envelope-routinesinitialization-e
+
+```
 ### 1. 安装项目
 克隆代码到本地并安装包依赖
 ```shell script
-git clone http://192.168.0.91/liwang/FaxToken-IM.git
-cd FaxToken-IM
-npm install
+# git clone http://192.168.0.91/liwang/FaxToken-IM.git
+git clone git@github.com:0xli/tokenim-app.git
+cd tokenim-app
+npm install --legacy-peer-deps
 ```
 
 ### 2. 安装Truffle
