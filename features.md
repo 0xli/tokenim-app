@@ -348,7 +348,11 @@ export async function queryENSForETHAddress(ensAddress: string): Promise<string>
 }
 
 ```  
-  
+- subdomain offchain query
+  - https://ens-gateway.beaglechat.workers.dev/get/beagles.eth
+  - https://app.ens.domains/beagles.eth
+  - https://app.ens.domains/wli.beagles.eth
+  - Resolver: https://etherscan.io/address/0x71b81d547de647d94a1892817c2bc9bc93c5badd#code
 ### 3.4 UI
 - ENS name support
 - Add a row to add or edit name, name can keep in a new smart contract which can search by address

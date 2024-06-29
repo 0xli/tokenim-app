@@ -85,7 +85,7 @@ const variables = {
                 console.log(follower.address, domain);
                 names[follower.address] = domain;
                 setNames(names);
-                for (let i = 0; followers.length; i++)
+                for (let i = 0; i<followers.length; i++)
                   if (followers[i].address == follower.address){
                     followers[i].domain = domain;
                     setFollowers(followers);
@@ -107,7 +107,7 @@ const variables = {
               console.log(following.address,domain);
               names[following.address]=domain;
               setNames(names);
-              for (let i = 0; followings.length; i++)
+              for (let i = 0; i<followings.length; i++)
                 if (followings[i].address == following.address){
                   followings[i].domain = domain;
                   setFollowers(followings);

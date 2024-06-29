@@ -38,6 +38,8 @@ const reverseRegistrarJSON = require('../../abi/ens/ReverseRegistrar');
 const EnsSubdomainFactory = require('../../ens/EnsSubdomainFactory');
 const FaxToken = require('../../abi/FaxToken');
 const FaxTokenIM = require('../../abi/FaxTokenIM.json');
+//const BeagleToken = require('../../contracts/artifacts/BeagleToken.json');
+//const BeagleIM = require('../../contracts/artifacts/BeagleIM.json');
 const BeagleToken = require('../../contracts/artifacts/BeagleToken.json');
 const BeagleIM = require('../../contracts/artifacts/BeagleIM.json');
 //const {network_id} = require('../../config');
@@ -389,12 +391,17 @@ export const FaxTokenImAPI = {
   },
 
   testENSContract: () => {
-    new Promise((resolve => {
-      FaxTokenImAPI.ensContract.methods.owner('0x0').call().then(result=>{
-        console.log('ensContract',result);
-        resolve(result);
-      });
-    }))
+    new Promise(resolve => {
+      try{
+        FaxTokenImAPI.ensContract.methods.owner('0x0').call().then(result=>{
+          console.log('ensContract',result);
+          resolve(result);
+        });
+      } catch (e) {
+        console.log(e);
+        resolve(false);
+      }
+    })
 //    return FaxTokenImAPI.ensContract.methods.owner().call('0x0');
   },
   initialWalletConnect:async (connector)=>{
