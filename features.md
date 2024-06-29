@@ -296,7 +296,7 @@ but it will connnent to our own whisper blockchain and we could give him some EH
   - https://www.argent.xyz/blog/building-ethereum-dapps-on-ios-with-web3-swift/
   - https://medium.com/mercuryprotocol/introducing-web3-swift-for-ethereum-ios-development-1e02212b662b
 ### 3.3 ENS query
-- use subgraph to query name
+#### 3.3.1 use subgraph to query name
   - https://medium.com/coinmonks/how-to-convert-ens-address-to-eth-address-in-js-251c6209c208
   - https://github.com/Shmoji/ens-example
   - https://thegraph.com/hosted-service/subgraph/ensdomains/ens
@@ -348,11 +348,59 @@ export async function queryENSForETHAddress(ensAddress: string): Promise<string>
 }
 
 ```  
-- subdomain offchain query
+#### 3.3.2 subdomain offchain API
+- Query
+  - https://ens-gateway.beaglechat.workers.dev/get/:name
   - https://ens-gateway.beaglechat.workers.dev/get/beagles.eth
   - https://app.ens.domains/beagles.eth
   - https://app.ens.domains/wli.beagles.eth
   - Resolver: https://etherscan.io/address/0x71b81d547de647d94a1892817c2bc9bc93c5badd#code
+```
+https://ens-gateway.beaglechat.workers.dev/get/ios.beagles.eth
+{
+  "name": "ios.beagles.eth",
+  "owner": "0x67548a3c43819643390A9Aa5E0BCB284422DEA86",
+  "addresses": {
+    "60": "0x67548a3c43819643390A9Aa5E0BCB284422DEA86"
+  },
+  "texts": {
+    "description": "Hello Testflight",
+    "displayName": "IOS tester",
+    "carrierAddress": "Lmtsf6ieWbeiaTguaUx1jw12rj9FwiAdFzPMMKS4apzynzzViHiL"
+  },
+  "createdAt": "2024-06-29 23:18:29",
+  "updatedAt": "2024-06-29T23:18:28.892Z"
+}
+```
+- Register
+  - https://github.com/0xli/ens-offchain-registrar.git
+```
+  const L1ensname = "beagles";
+  const requestBody: WorkerRequest = {
+    name: `${debouncedName}.${L1ensname}.eth`,
+    owner: address!,
+    addresses: { '60': address },
+    texts: { description, displayName,carrierAddress },
+    signature: {
+      hash: data!,
+      message: variables?.message!,
+    },
+  }
+
+  const {
+    data: gatewayData,
+    error: gatewayError,
+    isLoading: gatewayIsLoading,
+  } = useFetch(data && 'https://ens-gateway.beaglechat.workers.dev/set', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  })
+
+```
+  - 
 ### 3.4 UI
 - ENS name support
 - Add a row to add or edit name, name can keep in a new smart contract which can search by address
