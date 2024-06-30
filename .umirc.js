@@ -28,7 +28,7 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'BeagleDAO, Social Network for Crypto Metaverse',
+      title: 'Beagle Chat, Web3 Instant Messaging Platform',
       dll: false,
       locale: {
         enable: true,

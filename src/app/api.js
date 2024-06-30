@@ -494,9 +494,9 @@ export const FaxTokenImAPI = {
      }
      else
        provider = await detectEthereumProvider();
-
-       let chainId= provider.chainId;
+  let chainId;
        if (provider) {
+         chainId= provider.chainId;
          // From now on, this should always be true:
          // provider === window.ethereum
 //        startApp(provider); // initialize your app
@@ -521,7 +521,7 @@ export const FaxTokenImAPI = {
        } else {
          console.log('Please install MetaMask!');
        }
-       if (!isSupportedNatwork(provider.chainId))
+       if (!provider || !isSupportedNatwork(provider.chainId))
 //       if (provider.chainId!=1515 && provider.chainId!=4)
          return;
        chainId = Math.round(chainId);

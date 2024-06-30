@@ -12,6 +12,7 @@ import PolkadotSvg from '@/assets/polkadot-js.svg';
 import MetamaskSvg from '@/assets/metamask-fox.svg';
 import GoogleConnectSvg from '@/assets/google.svg';
 import GithubConnectSvg from '@/assets/github.svg';
+import EnsSvg from '@/assets/ethereum-name-service-ens-logo.png';
 
 const FormItem = Form.Item;
 
@@ -95,7 +96,8 @@ class LoginPage extends PureComponent {
   }
 
   register = () => {
-    this.props.dispatch(routerRedux.push('/register'))
+//    this.props.dispatch(routerRedux.push('/register'))
+    this.props.dispatch(routerRedux.push('/ens'))
   }
 
   searchAddress = (v) => {
@@ -142,6 +144,14 @@ class LoginPage extends PureComponent {
     alert("AA+MPC Wallet:\r\nUse Github Account to Authenticate. \r\nComing soon ....");
     dispatch({ type: 'account/loginWithGithub', payload: { query } });
   }
+  ensRegistrar = () => {
+    // const { dispatch, location: { query } } = this.props;
+    // alert("AA+MPC Wallet:\r\nUse Google Account to Authenticate.\r\nComing soon ....");
+    // dispatch({ type: 'account/ensRegistrar', payload: { query } });
+    const win = window.open("https://beagle.chat/ens", '_blank');
+    if (win != null) {
+      win.focus();
+    }  }
   connectSubstrate = () => {
     const { dispatch } = this.props;
     dispatch({ type: 'account/loginWithSubstrate' });
@@ -220,14 +230,22 @@ class LoginPage extends PureComponent {
 
     return (
       <div>
+        <img src='../image/SVG/beagle1.svg' alt='' width='50' style={{ margin:20, borderRadius: 5, marginBottom: 5 }} />
         <div className={styles.menu} style={{ textAlign: 'center' }}>
-          <a href={enLocale ? 'pages/whitepaperEN.html' : 'pages/whitepaper.html'} style={{color:'#989A9C', width:'25%',marginRight: "5%" }}>{formatMessage({ id: 'index.white_paper' })}</a>
+          <a href={enLocale ? 'pages/whitepaperEN.html' : 'pages/whitepaper.html'} style={{
+            color: '#989A9C',
+            width: '25%',
+            marginRight: '5%',
+          }}>{formatMessage({ id: 'index.white_paper' })}</a>
           {/*<a href={enLocale ? 'https://beagle.gitbook.io/beagle-dao/' : 'https://beagle.gitbook.io/beagle-dao/'} style={{color:'#989A9C', width:'25%',marginRight: "5%" }}>{formatMessage({ id: 'index.white_paper' })}</a>*/}
-          <a href={enLocale ? 'pages/faqEN.html' : 'pages/faq.html'} style={{ color:'#989A9C',  width:'20%', marginRight: '5%' }}>{formatMessage({ id: 'index.faq' })}</a>
-          <a href={enLocale ? 'pages/downloadEN.html' : 'pages/download.html'} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>{formatMessage({ id: 'index.download' })}</a>
+          <a href={enLocale ? 'pages/faqEN.html' : 'pages/faq.html'}
+             style={{ color: '#989A9C', width: '20%', marginRight: '5%' }}>{formatMessage({ id: 'index.faq' })}</a>
+          <a href={enLocale ? 'pages/downloadEN.html' : 'pages/download.html'}
+             style={{ color: '#989A9C', width: '20%', marginRight: '5%' }}>{formatMessage({ id: 'index.download' })}</a>
           {/*<a href="https://apps.apple.com/us/app/beagle/id1597429120"  target="_blank" style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }} rel="noreferrer">{formatMessage({ id: 'index.download' })}</a>*/}
-          <a href={`/?locale=${oLocale}`} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>{oLocaleDes}</a>
-          <a href={this.openSetting}  onClick={this.openSetting} style={{ color:'#989A9C',  width:'20%',marginRight: '5%' }}>OPT</a>
+          <a href={`/?locale=${oLocale}`} style={{ color: '#989A9C', width: '20%', marginRight: '5%' }}>{oLocaleDes}</a>
+          <a href={this.openSetting} onClick={this.openSetting}
+             style={{ color: '#989A9C', width: '20%', marginRight: '5%' }}>OPT</a>
         </div>
         <div className={styles.container}>
           {/*<div style={{ display: 'flex', justifyContent: 'flex-end' }}>*/}
@@ -236,89 +254,101 @@ class LoginPage extends PureComponent {
           {/*  </Tooltip>*/}
           {/*</div>*/}
           <div style={{ textAlign: 'center' }}>
-            <img src="../image/happy_beagles.jpg" alt="" width="200" style={{ marginBottom: 5 }} />
-            <h2 style={{ marginBottom: 0, marginTop:0, fontWeight: 900 }}>Beagle Chat</h2>
-            <p style={{ marginBottom: 30,color:'#989A9C' }}>Connect people in the metaverse</p>
+            <h2 style={{ marginBottom: 0, marginTop: 0, fontWeight: 900 }}>Beagle Chat</h2>
+            <p style={{ marginBottom: 30, color: '#989A9C' }}>Connect people in the Web3 world</p>
             {/*<p>{formatMessage({ id: 'index.description' })}</p>*/}
           </div>
           <Spin spinning={loginLoading || ensLoading} tip={loginTip}>
-            <Form onFinish={this.handleSubmit} className="login-form" >
-              {signInWithENS
-                ? <FormItem>
-                  <AutoComplete
-                    dropdownMatchSelectWidth={false}
-                    options={ensOptions}
-                    onSearch={this.searchEns}
-                    onChange={this.onENSNameChange}
-                  >
-                    <Input
-                      prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      placeholder={formatMessage({ id: 'index.ens_name' })}
-                      addonAfter=".beagles"
-                      suffix={ensNameCheck}
-                    />
-                  </AutoComplete>
-                  {errorMessage
-                    ? <div style={{ margin: '10px 0' }}>
-                      <Alert message={errorMessage} type="error" />
-                    </div>
-                    : null}
-                </FormItem>
-                : <FormItem>
-                  <AutoComplete
-                    dropdownMatchSelectWidth={false}
-                    options={options}
-                    onSearch={this.searchAddress}
-                    onChange={(val) => this.setState({ address: val })}
-                  >
-                    <Input
-                      prefix={<UserOutlined style={{border:'0px',borderRadius:12, color: 'rgba(0,0,0,.25)' }} />}
-                      placeholder={formatMessage({ id: 'index.account_address' })}
-                    />
-                  </AutoComplete>
-                </FormItem>}
+            <Form onFinish={this.handleSubmit} className='login-form'>
+              {/*{signInWithENS*/}
+              {/*  ? <FormItem>*/}
+              {/*    <AutoComplete*/}
+              {/*      dropdownMatchSelectWidth={false}*/}
+              {/*      options={ensOptions}*/}
+              {/*      onSearch={this.searchEns}*/}
+              {/*      onChange={this.onENSNameChange}*/}
+              {/*    >*/}
+              {/*      <Input*/}
+              {/*        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}*/}
+              {/*        placeholder={formatMessage({ id: 'index.ens_name' })}*/}
+              {/*        addonAfter=".beagles"*/}
+              {/*        suffix={ensNameCheck}*/}
+              {/*      />*/}
+              {/*    </AutoComplete>*/}
+              {/*    {errorMessage*/}
+              {/*      ? <div style={{ margin: '10px 0' }}>*/}
+              {/*        <Alert message={errorMessage} type="error" />*/}
+              {/*      </div>*/}
+              {/*      : null}*/}
+              {/*  </FormItem>*/}
+              {/*  : <FormItem>*/}
+              {/*    <AutoComplete*/}
+              {/*      dropdownMatchSelectWidth={false}*/}
+              {/*      options={options}*/}
+              {/*      onSearch={this.searchAddress}*/}
+              {/*      onChange={(val) => this.setState({ address: val })}*/}
+              {/*    >*/}
+              {/*      <Input*/}
+              {/*        prefix={<UserOutlined style={{border:'0px',borderRadius:12, color: 'rgba(0,0,0,.25)' }} />}*/}
+              {/*        placeholder={formatMessage({ id: 'index.account_address' })}*/}
+              {/*      />*/}
+              {/*    </AutoComplete>*/}
+              {/*  </FormItem>}*/}
 
-              <FormItem>
-                <Input
-                  prefix={<LockOutlined style={{ border:'0px',borderRadius:12,color: 'rgba(0,0,0,.25)' }} />}
-                  type="password"
-                  placeholder={formatMessage({ id: 'password' })}
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-              </FormItem>
+              {/*<FormItem>*/}
+              {/*  <Input*/}
+              {/*    prefix={<LockOutlined style={{ border:'0px',borderRadius:12,color: 'rgba(0,0,0,.25)' }} />}*/}
+              {/*    type="password"*/}
+              {/*    placeholder={formatMessage({ id: 'password' })}*/}
+              {/*    onChange={(e) => this.setState({ password: e.target.value })}*/}
+              {/*  />*/}
+              {/*</FormItem>*/}
               {/*<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>*/}
               {/*  <a onClick={this.goVisitorMode}><LoginOutlined style={{ marginRight: 10 }} />{formatMessage({ id: 'index.visitor' })}</a>*/}
               {/*  {signInWithENS*/}
               {/*    ? <a onClick={this.switchToAddressLogin}>{formatMessage({ id: 'index.wallet_login' })}</a>*/}
               {/*    : <a onClick={this.switchToENSLogin}>{formatMessage({ id: 'index.ens_login' })}</a>}*/}
               {/*</div>*/}
+              {/*<FormItem>*/}
+              {/*  /!*<Button disabled={connectingMetamask} onClick={this.register} style={{ width: '45%', marginRight: '10%', backgroundColor: 'rgba(58, 141, 218, 0.2)' }}>*!/*/}
+              {/*  /!*  {formatMessage({ id: 'index.get_wallet' })}*!/*/}
+              {/*  /!*</Button>*!/*/}
+              {/*  <Button disabled={connectingMetamask} type="primary" htmlType="submit" style={{ width: '100%', border:'0px',borderRadius:12,background:'#352E50' }}>*/}
+              {/*    {formatMessage({ id: 'index.login' })}*/}
+              {/*  </Button>*/}
+              {/*</FormItem>*/}
+              {/*<FormItem>*/}
+              {/*  <Button loading={connectingSubstrate} onClick={this.connectGoogle} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GoogleConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.googleconnect' })}</Button>*/}
+              {/*</FormItem>*/}
+              {/*<FormItem>*/}
+              {/*  <Button loading={connectingSubstrate} onClick={this.connectGithub} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GithubConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.githubconnect' })}</Button>*/}
+              {/*</FormItem>*/}
               <FormItem>
-                {/*<Button disabled={connectingMetamask} onClick={this.register} style={{ width: '45%', marginRight: '10%', backgroundColor: 'rgba(58, 141, 218, 0.2)' }}>*/}
-                {/*  {formatMessage({ id: 'index.get_wallet' })}*/}
-                {/*</Button>*/}
-                <Button disabled={connectingMetamask} type="primary" htmlType="submit" style={{ width: '100%', border:'0px',borderRadius:12,background:'#352E50' }}>
-                  {formatMessage({ id: 'index.login' })}
+                <Button loading={connectingSubstrate} onClick={this.ensRegistrar} block type='primary' ghost
+                        style={{ width: '100%', borderRadius: 12 }}><img src={EnsSvg} alt='' width='20'
+                                                                         style={{ marginRight: 8 }} />{formatMessage({ id: 'index.ensRegistrar' })}
                 </Button>
-              </FormItem>
-              <FormItem>
-                <Button loading={connectingSubstrate} onClick={this.connectGoogle} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GoogleConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.googleconnect' })}</Button>
-              </FormItem>
-              <FormItem>
-                <Button loading={connectingSubstrate} onClick={this.connectGithub} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={GithubConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.githubconnect' })}</Button>
               </FormItem>
               {
                 metamaskOk ?
                   <FormItem>
-                    <Button loading={connectingMetamask} onClick={this.connectMetamask} block  danger style={{ width: '100%', borderRadius:12 }}><img src={MetamaskSvg} alt="" width="20" style={{ marginRight: 8}} />{formatMessage({ id: 'index.metamaskconnect' })}</Button>
+                    <Button loading={connectingMetamask} onClick={this.connectMetamask} block danger
+                            style={{ width: '100%', borderRadius: 12 }}><img src={MetamaskSvg} alt='' width='20'
+                                                                             style={{ marginRight: 8 }} />{formatMessage({ id: 'index.metamaskconnect' })}
+                    </Button>
                   </FormItem>
                   :
                   null
               }
               <FormItem>
-                <Button loading={connectingSubstrate} onClick={this.connectWalletConnect} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={WalletConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.walletconnect' })}</Button>
+                <Button loading={connectingSubstrate} onClick={this.connectWalletConnect} block type='primary' ghost
+                        style={{ width: '100%', borderRadius: 12 }}><img src={WalletConnectSvg} alt='' width='20'
+                                                                         style={{ marginRight: 8 }} />{formatMessage({ id: 'index.walletconnect' })}
+                </Button>
               </FormItem>
               <FormItem>
-                <Button disabled={connectingMetamask} onClick={this.register} style={{ width: '100%',  color:'#352E50',border:0, borderRadius:12, marginRight: '10%' }}>
+                <Button disabled={connectingMetamask} onClick={this.register}
+                        style={{ width: '100%', color: '#352E50', border: 0, borderRadius: 12, marginRight: '10%' }}>
                   {formatMessage({ id: 'index.get_wallet' })}
                 </Button>
                 {/*<Button loading={connectingSubstrate} onClick={this.register} block  type='primary' ghost style={{ width: '100%', borderRadius:12 }}><img src={WalletConnectSvg} alt="" width="20" style={{ marginRight: 8 }} />{formatMessage({ id: 'index.walletconnect' })}</Button>*/}
@@ -332,19 +362,25 @@ class LoginPage extends PureComponent {
 
 
           <Modal
-            title={<div><PhoneOutlined style={{ transform: 'rotate(90deg)', color: '#5190ff', fontSize: 20 }} />{formatMessage({ id: 'index.use_callpass_to_communicate' })}</div>}
+            title={<div><PhoneOutlined style={{
+              transform: 'rotate(90deg)',
+              color: '#5190ff',
+              fontSize: 20,
+            }} />{formatMessage({ id: 'index.use_callpass_to_communicate' })}</div>}
             visible={comfirmCallModal}
             onOk={() => this.setState({ comfirmCallModal: false })}
             onCancel={() => this.setState({ comfirmCallModal: false })}
             okText={<a onClick={() => this.setState({ comfirmCallModal: false })}
-                       target="view_window"
-                       href="https://www.callpass.cn/btncall?key=4f04aa92-972e-4bd7-b5f0-a6789b50620a&from=https://t.callt.net">
+                       target='view_window'
+                       href='https://www.callpass.cn/btncall?key=4f04aa92-972e-4bd7-b5f0-a6789b50620a&from=https://t.callt.net'>
               <PhoneOutlined style={{ transform: 'rotate(90deg)', color: '#ffffff', fontSize: 20 }} />
               <span>{formatMessage({ id: 'yes' })}</span>
             </a>}
-            cancelText={<div style={{ color: '#dc3545' }}><PhoneOutlined style={{ transform: 'rotate(225deg)', fontSize: 20 }} /> <span>{formatMessage({ id: 'cancel' })}</span> </div>}
+            cancelText={<div style={{ color: '#dc3545' }}><PhoneOutlined
+              style={{ transform: 'rotate(225deg)', fontSize: 20 }} /> <span>{formatMessage({ id: 'cancel' })}</span>
+            </div>}
           >
-            <div style={{ textAlign: 'center', fontSize: 16, }}>
+            <div style={{ textAlign: 'center', fontSize: 16 }}>
               {formatMessage({ id: 'index.confirm_call_allcom' })}
             </div>
           </Modal>
@@ -386,12 +422,12 @@ class LoginPage extends PureComponent {
             {/*</FormItem>*/}
           </Modal>
           <Modal
-            title="Choose account"
+            title='Choose account'
             visible={substrateModal}
             maskClosable={false}
             closable={false}
-            okText="Confirm"
-            cancelText="Cancel"
+            okText='Confirm'
+            cancelText='Cancel'
             onOk={this.confirmConnectSubstrate}
             onCancel={this.cancelConnectSubstrate}
           >
@@ -408,18 +444,24 @@ class LoginPage extends PureComponent {
             </Radio.Group>
           </Modal>
         </div>
-        <p className={styles.copyright}>Copyright © 2020-2022 <a href="https://www.beagledao.finance" style={{color:'#352E50'}}>{formatMessage({ id: 'allcom' })}</a></p>
-          {/*<p className={styles.beian}><a href="https://beian.miit.gov.cn/" target="_blank"> 沪ICP备14021271号-4</a></p>*/}
-        <p className={styles.beian }> beagles.eth on
-          <a href="https://app.ens.domains/name/beagles.eth" target={'_blank'} style={{fontWeight:'bold'}} rel="noreferrer" > ENS </a>
-          and <a href="https://ens.dns3.xyz/name/beagles.eth"  target={'_blank'} style={{fontWeight:'bold'} } rel="noreferrer"> L2</a>
-          <a href={enLocale ? 'pages/privacyEN.html' : 'pages/privacy.html'} style={{ color:'#989A9C'}}>  {formatMessage({ id: 'index.privacy' })}</a>
+        <p className={styles.copyright}>Copyright © 2020-2024 <a href='https://www.beagle.chat'
+                                                                 style={{ color: '#352E50' }}>{formatMessage({ id: 'allcom' })}</a>
+        </p>
+        {/*<p className={styles.beian}><a href="https://beian.miit.gov.cn/" target="_blank"> 沪ICP备14021271号-4</a></p>*/}
+        <p className={styles.beian}> beagles.eth on
+          <a href='https://app.ens.domains/name/beagles.eth' target={'_blank'} style={{ fontWeight: 'bold' }}
+             rel='noreferrer'> ENS </a>
+          and <a href='https://ens.dns3.xyz/name/beagles.eth' target={'_blank'} style={{ fontWeight: 'bold' }}
+                 rel='noreferrer'> L2</a>
+          <a href={enLocale ? 'pages/privacyEN.html' : 'pages/privacy.html'}
+             style={{ color: '#989A9C' }}>  {formatMessage({ id: 'index.privacy' })}</a>
         </p>
         <div className={styles.status} style={{ textAlign: 'center' }}>
           {/*<p style={{ marginBottom: 0 }}>{formatMessage({ id: 'index.encrypt_coin' })}</p>*/}
           {/*<p>{formatMessage({ id: 'index.digital_currency' })}</p>*/}
 
-          <a href="http://app.beagledao.finance:3000/" target="_blank" style={{color:'#352E50'}} rel="noreferrer">{formatMessage({ id: 'index.network_status' })}</a>
+          <a href='http://www.beagle.chat/' target='_blank' style={{ color: '#352E50' }}
+             rel='noreferrer'>{formatMessage({ id: 'index.network_status' })}</a>
           <p style={{ marginBottom: 0 }}>
             {/*<span>{formatMessage({ id: 'index.contact' })}:</span>*/}
             {/*<PhoneOutlined style={{ transform: 'rotate(90deg)', color: '#5190ff' }} />*/}

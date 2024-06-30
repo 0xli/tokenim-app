@@ -78,7 +78,7 @@ export async function connectMetamask() {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [{ chainId: '0x5eb',
-                        chainName: 'BeagleDAO App Chain',
+                        chainName: 'Beagle Chat App Chain',
                         nativeCurrency: {
                           name: 'beagledao',
                           symbol: 'bETH',

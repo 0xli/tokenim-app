@@ -1,5 +1,5 @@
 export default {
-  'allcom': 'BeagleDAO Team',
+  'allcom': 'Beagle Chat Team',
   'return': 'Return',
   'login': 'Login',
   'register': 'Register',
@@ -88,6 +88,7 @@ export default {
   'index.index.substrate_rpc_peer':'Substrate Peer',
   'index.googleconnect':'Connect with Google',
   'index.githubconnect':'Connect with Github',
+  'index.ensRegistrar':'Registrar subdomain of beagles.eth',
 
   'register.pk_error': 'private key is invalid, the elliptic curve condition is not satisfied ',
   'register.pk_format_error': 'wrong private key format',

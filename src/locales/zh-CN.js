@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React from 'react';
 
 export default {
-  'allcom': 'BeagleDao社区',
+  'allcom': 'Beagle Chat社区',
   'return': '返回',
   'login': '登陆',
   'register': '注册',
@@ -91,6 +91,7 @@ export default {
   'index.substrate_rpc_peer':'Substrate节点',
   'index.googleconnect':'用Google登录',
   'index.githubconnect':'用Github登录',
+  'index.ensRegistrar':'注册beagles.eth子域名',
 
   'register.pk_error': 'private key无效, 不满足椭圆曲线条件',
   'register.pk_format_error': 'private key格式不正确',
